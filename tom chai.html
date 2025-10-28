@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>จำลองเว็บ Music.co.th</title>
+    <style>
+
+        body, h1, h2, h3, p, ul, li {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f4f4f4;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- Main Container --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* --- 1. Header (ส่วนหัว) --- */
+        header {
+            background-color: #fff;
+            padding: 20px 0;
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #d90000; /* สีแดงคล้ายโลโก้ */
+        }
+        .search-bar {
+            flex-grow: 1;
+            margin: 0 40px;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .user-actions {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* --- 2. Navigation (เมนูหลัก) --- */
+        nav {
+            background-color: #FF5F1F;
+            color: white;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            padding: 15px 25px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        nav ul li:hover {
+            background-color: #aa3e00;
+        }
+
+        /* --- 3. Main Content (เนื้อหาหลัก) --- */
+        main {
+            padding: 30px 0;
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            background-color: #ddd;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: #555;
+            text-align: center;
+            margin-bottom: 30px;
+            background-image: url("img/Untitled.jpg");
+            background-size: cover;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #FF5F1F;
+        }
+
+        /* Product Grid (ตารางสินค้า) */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        /* Product Card (การ์ดสินค้า) */
+        .product-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background-color: #eee;
+            /* ใช้ placeholder image */
+            background-image: url('https://placehold.co/300x200/eeeeee/aaaaaa?text=Product+Image');
+            background-size: cover;
+            background-position: center;
+        }
+        .product-info {
+            padding: 15px;
+        }
+        .product-info h3 {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .product-price {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #FF2A00;
+            margin-bottom: 15px;
+        }
+        .add-to-cart-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #FF5F1F; /* สีเขียว */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .add-to-cart-btn:hover {
+            background-color: #aa3e00;
+        }
+
+        /* --- 4. Footer (ส่วนท้าย) --- */
+        footer {
+            background-color: #333;
+            color: #aaa;
+            padding: 40px 0;
+            margin-top: 30px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .footer-grid h4 {
+            color: #fff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .footer-grid ul {
+            list-style: none;
+        }
+        .footer-grid ul li {
+            margin-bottom: 10px;
+        }
+        .footer-grid ul li a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        .footer-grid ul li a:hover {
+            color: #fff;
+        }
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #555;
+            font-size: 0.9em;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">MUSIC.CO.TH</div>
+            <div class="search-bar">
+                <input type="text" placeholder="ค้นหาสินค้า...">
+            </div>
+            <div class="user-actions">
+                <a href="#">เข้าสู่ระบบ</a>
+                <a href="#">ตะกร้า (0)</a>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li>BRANDS</li>
+                <li>กีตาร์</li>
+                <li>เอฟเฟคกีตาร์</li>
+                <li>ตู้แอมป์</li>
+                <li>กลอง</li>
+                <li>อุปกรณ์ดนตรี</li>
+                <li>PROMOTION</li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+        <section class="hero-banner">
+            </section>
+
+        <section class="product-section">
+            <h2 class="section-title">สินค้ามาใหม่ (New Arrivals)</h2>
+            
+            <div class="product-grid">
+                <article class="product-card">
+                    <div class="product-image"></div>
+                    <div class="product-info">
+                        <h3>Taylor GS Mini-e Koa Plus</h3>
+                        <div class="product-price">35,900 ฿</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('Taylor GS Mini')">เพิ่มลงตะกร้า</button>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <div class="product-image"></div>
+                    <div class="product-info">
+                        <h3>Fender Player Telecaster</h3>
+                        <div class="product-price">28,800 ฿</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('Fender Telecaster')">เพิ่มลงตะกร้า</button>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <div class="product-image"></div>
+                    <div class="product-info">
+                        <h3>BOSS Katana-50 MkII</h3>
+                        <div class="product-price">10,800 ฿</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('BOSS Katana')">เพิ่มลงตะกร้า</button>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <div class="product-image"></div>
+                    <div class="product-info">
+                        <h3>Zoom G1X FOUR</h3>
+                        <div class="product-price">4,200 ฿</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('Zoom G1X')">เพิ่มลงตะกร้า</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>MUSIC COLLECTION</h4>
+                    <ul>
+                        <li><a href="#">เกี่ยวกับเรา</a></li>
+                        <li><a href="#">ติดต่อเรา</a></li>
+                        <li><a href="#">สาขา</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>CUSTOMER CARE</h4>
+                    <ul>
+                        <li><a href="#">วิธีการสั่งซื้อ</a></li>
+                        <li><a href="#">การจัดส่ง</a></li>
+                        <li><a href="#">การรับประกัน</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>CATEGORY</h4>
+                    <ul>
+                        <li><a href="#">กีตาร์</a></li>
+                        <li><a href="#">กลอง</a></li>
+                        <li><a href="#">แอมป์</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>BRANDS</h4>
+                    <ul>
+                        <li><a href="#">Taylor</a></li>
+                        <li><a href="#">Martin</a></li>
+                        <li><a href="#">PRS</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Music Collection All Rights Reserved. (โค้ดจำลองโดย AI)
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function addToCart(productName) {
+            alert('คุณได้เพิ่ม "' + productName + '" ลงในตะกร้าแล้ว!');
+        }
+    </script>
+
+</body>
+</html>
